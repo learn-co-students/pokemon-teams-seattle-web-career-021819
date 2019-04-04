@@ -32,9 +32,6 @@ function addPokemon(id) {
       rerender()
     }
   )
-  .catch(
-    alert("Your party is already full!")
-  )
 }
 
 // DELETE POKEMON
