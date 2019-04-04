@@ -3,7 +3,6 @@ const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
 
 const main = document.getElementById('main')
-let trainerData
 
 // GET AND RENDER TRAINERS
 function getTrainers() {
