@@ -29,9 +29,9 @@ function getPokemon(id) {
   .then(res => res.json())
   .then(
     pokemon => {
-      addPokemon(pokemon)
+      addPokemonLi(pokemon)
     }
-  )
+  ).catch(error => console.error(error));
 }
 
 // DELETE POKEMON
@@ -45,17 +45,17 @@ function deletePokemon(id) {
   .then(res => res.json())
   .then(
     pokemon => {
-      removePokemon(pokemon)
+      removePokemonLi(pokemon)
     }
   )
 }
 
-function addPokemon(pokemon) {
+function addPokemonLi(pokemon) {
   ul = document.getElementById("trainer"+pokemon.trainer_id)
   ul.appendChild(createPokemon(pokemon))
 }
 
-function removePokemon(pokemon) {
+function removePokemonLi(pokemon) {
   li = document.getElementById("pokemon"+pokemon.id)
   li.remove()
 }
