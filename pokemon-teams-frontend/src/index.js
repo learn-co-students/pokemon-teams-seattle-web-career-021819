@@ -92,7 +92,9 @@ function renderCards(data) {
 
 function createTrainer(trainer) {
   card = document.createElement('div')
+  cardInfo = document.createElement('div')
   card.classList.add("card")
+  cardInfo.classList.add("card-info")
 
   add = document.createElement('button')
   add.textContent = 'Add Pokemon'
@@ -111,9 +113,10 @@ function createTrainer(trainer) {
     ul.appendChild(createPokemon(pokemon))
   })
 
-  card.appendChild(p)
-  card.appendChild(add)
-  card.appendChild(ul)
+  cardInfo.appendChild(p)
+  cardInfo.appendChild(add)
+  cardInfo.appendChild(ul)
+  card.appendChild(cardInfo)
 
   return card
 }

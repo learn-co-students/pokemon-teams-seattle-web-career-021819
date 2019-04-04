@@ -1,6 +1,8 @@
 body {
   margin: 0;
   padding: 0;
+  background-image: url("https://images6.alphacoders.com/420/420248.jpg");
+  background-size: cover;
 }
 
 header {
@@ -24,17 +26,30 @@ main {
 }
 
 div.card {
-  background-color: #eeeeee;
+  position: relative;
   height: 250px;
   width: 300px;
-  box-shadow: 10px 10px grey;
+  box-shadow: 10px 10px rgba(0,0,0,0.5);
   padding: 10px;
   border-radius: 10px;
+  background-image: url("https://external-preview.redd.it/rAvLMOmF7jSEV3aWUix-uWwvDbNe4gSn-_AOHcrWAzY.png?auto=webp&s=e7675b0ff0d3af37fbef82e8a27ad581730252f6");
+  background-size: cover;
+}
+
+
+.card-info {
+  color: white;
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
 }
 
 p {
   font-size: 1.5em;
-  color: black;
   font-family: Helvetica;
 }
 
