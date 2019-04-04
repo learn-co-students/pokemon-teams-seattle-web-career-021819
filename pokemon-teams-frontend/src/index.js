@@ -17,6 +17,7 @@ function getTrainers() {
 
 // ADD POKEMON
 function getPokemon(id) {
+  //debugger
   fetch(POKEMONS_URL, {
     method: "POST",
     headers: {
@@ -26,12 +27,19 @@ function getPokemon(id) {
       "trainer_id": id
     })
   })
-  .then(res => res.json())
+  .then(res => { 
+    if (res.status === 403)
+      alert("Party is full!")
+    else if (res.status === 404)
+      alert("Trainer not found")
+    else
+      return res.json()
+  })
   .then(
     pokemon => {
       addPokemonLi(pokemon)
     }
-  ).catch(error => console.error(error));
+  )
 }
 
 // DELETE POKEMON
