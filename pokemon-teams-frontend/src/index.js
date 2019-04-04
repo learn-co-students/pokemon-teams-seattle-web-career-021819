@@ -9,7 +9,6 @@ function getTrainers() {
   fetch(TRAINERS_URL)
     .then(res => res.json())
     .then(data => {
-      trainerData = data
       renderCards(data)
     })
 }
