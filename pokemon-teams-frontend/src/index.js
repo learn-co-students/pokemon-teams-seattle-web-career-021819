@@ -10,25 +10,32 @@ fetch(TRAINERS_URL)
 
 function makeTrainerCard(json) {
 
-  // add
+  // get main document
   let main = document.getElementById("main")
+
+  // create card element
   let div = document.createElement("div")
-  div.className = "card"
+  div.className = "card "
+  div.setAttribute("data-id", json.id)
+
+  // create p element for trainer name
   let p = document.createElement("p")
   p.textContent = json.name
   div.appendChild(p)
+
+  // create button to add pokemon
   let button = document.createElement("button")
   button.textContent = "Add Pokemon"
-  button.hasAttribute = "data-trainer-id"
   button.setAttribute("data-trainer-id", json.id)
   button.addEventListener('click', ()=> {
-    if (json.pokemons.length <= 6) {
-      // add pokemon
+    // console.log("add pokemon button clicked")
+    if (getTrainerPokeCount(json.id) <= 6) {
+      //add pokemon
       fetchPokemon(json.id)
     }
     else {
       // alert that trainer cannot have more than 6 pokemons
-      alert(`Trainer ${json.name} cannot have more than 6 pokeon`)
+      alert(`Trainer ${json.name} cannot have more than 6 pokemons`)
     }
   })
   div.appendChild(button)
@@ -37,6 +44,11 @@ function makeTrainerCard(json) {
 
   div.appendChild(list)
   main.appendChild(div)
+}
+
+function getTrainerPokeCount(id) {
+  let card = document.querySelector(`[data-id='${id}']`)
+  return card.children[2].childElementCount
 }
 
 function createPokemonList(json) {
@@ -49,6 +61,7 @@ function createPokemonList(json) {
 }
 
 function createPokemon(pokedeets) {
+  // console.log(pokedeets)
   let li = document.createElement("li")
   li.textContent = pokedeets.nickname + ' (' + pokedeets.species + ')'
   let button = document.createElement("button")
@@ -56,14 +69,14 @@ function createPokemon(pokedeets) {
   button.className = "release"
   button.hasAttribute = "data-pokemon-id"
   button.setAttribute("data-pokemon-id", pokedeets.id)
+  button.addEventListener("click", () => {
+    removePokemon(pokedeets.trainer_id, pokedeets.id)
+  })
   li.appendChild(button)
-  let ul = li.getElementsByTagName('ul')
-  console.log(ul)
   return li
 }
 
 function fetchPokemon(id) {
-
   let config = {
     method: 'POST',
     headers: {
@@ -75,4 +88,22 @@ function fetchPokemon(id) {
   fetch(POKEMONS_URL, config)
   .then(response => response.json())
   .then(pokemon => createPokemon(pokemon))
+  .then(li => addLiToList(li, id))
+}
+
+function addLiToList(li, id) {
+  let card = document.querySelector(`[data-id='${id}']`)
+  let list = card.children[2]
+  list.appendChild(li)
+  return card
+}
+
+function removePokemon(trainerId, pokeId) {
+  let card = document.querySelector(`[data-id='${trainerId}']`)
+  document.querySelector(`[data-pokemon-id='${pokeId}']`).parentNode.remove()
+  fetch(`${POKEMONS_URL}/${pokeId}`, {
+    method: "DELETE"
+  })
+  .then(res => res.json())
+  return card
 }
