@@ -39,7 +39,7 @@ function renderTrainers(data){
 
 function addPokemon(trainer, pokemon){
   console.log(pokemon)
-  if (pokemon.id instanceof Number ){
+  if (pokemon.id.instanceof(Number) ){
 
   }else{
   let div = document.getElementById(`${trainer.id}`)
