@@ -44,11 +44,23 @@ li {
   padding-right: 20px;
 }
 
+
+.delete-button {
+  font-size: .65em;
+  color: #fff;
+  background-color: red;
+  border-radius: 10px;
+}
+
 button {
   font-size: .65em;
   color: #fff;
   background-color: green;
   border-radius: 10px;
+}
+
+.hidden {
+  display: none;
 }
 
 button.release {
